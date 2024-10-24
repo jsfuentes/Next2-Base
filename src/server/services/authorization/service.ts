@@ -1,12 +1,10 @@
-import type { Project, User } from "@prisma/client";
-import type { Company, CompanyMember } from "@prisma/client";
+import type { Company, CompanyMember, User } from "@prisma/client";
 
 import type { AuthenticationContext } from "@/server/services/authentication/context";
 import { authorize } from "@/server/services/authorization/authorize";
 import type {
   CompanyAction,
   CompanyMemberAction,
-  ProjectAction,
   UserAction,
 } from "@/server/services/authorization/types";
 
@@ -35,21 +33,6 @@ export async function hasUserPerm(
       authorize(ctx, act, {
         type: `User`,
         id: typeof userId === `string` ? userId : userId.id,
-      })
-    )
-  );
-}
-
-export async function hasProjectPerm(
-  ctx: AuthenticationContext | null,
-  actions: ProjectAction[],
-  projectId: string | Project
-) {
-  await Promise.all(
-    actions.map((act) =>
-      authorize(ctx, act, {
-        type: `Project`,
-        id: typeof projectId === `string` ? projectId : projectId.id,
       })
     )
   );

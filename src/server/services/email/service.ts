@@ -1,8 +1,7 @@
 import { render } from "@react-email/render";
 import type { JSXElementConstructor, ReactElement } from "react";
 
-import { env } from "@/env";
-import { postmark } from "@/server/init/postmark";
+import { logger } from "@/init/logger";
 
 class EmailService {
   async sendTransactionalEmail(params: {
@@ -13,12 +12,9 @@ class EmailService {
   }) {
     const emailHtml = render(params.body);
 
-    await postmark.sendEmail({
-      From: params.from ?? env.SMTP_FROM,
-      To: params.to,
-      Subject: params.subject,
-      HtmlBody: emailHtml,
-    });
+    //TODO: Implement email sending provider
+    logger.info(`Need to implement email sending: ${emailHtml}`);
+    await Promise.resolve();
   }
 }
 

@@ -218,9 +218,6 @@ dependencies:
   query-string:
     specifier: ^9.0.0
     version: 9.0.0
-  ragie:
-    specifier: ^0.9.0
-    version: 0.9.0(zod@3.23.8)
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -18930,17 +18927,6 @@ packages:
       {
         integrity: sha512-tYC1Q1hgyRuHgloV/YXs2w15unPVh8qfu/qCTfhTYamaw7fyhumKa2yGpdSo87vY32rIclj+4fWYQXUMs9EHvg==,
       }
-    dev: false
-
-  /ragie@0.9.0(zod@3.23.8):
-    resolution:
-      {
-        integrity: sha512-RHAai8H6kYPo0S3XzhSVPEVXsp5NHr4rsveol9In8GHrrTaXskf5OrqvCcGvFae4mCC1GTZsCJTIV7eB4zjyZA==,
-      }
-    peerDependencies:
-      zod: ">= 3"
-    dependencies:
-      zod: 3.23.8
     dev: false
 
   /rake-modified@1.0.8:

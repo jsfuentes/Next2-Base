@@ -1,10 +1,6 @@
 import type { User } from "@prisma/client";
 
-export type Action =
-  | CompanyAction
-  | CompanyMemberAction
-  | UserAction
-  | ProjectAction;
+export type Action = CompanyAction | CompanyMemberAction | UserAction;
 
 export enum CompanyAction {
   VIEW = `company:view`,
@@ -21,11 +17,6 @@ export enum CompanyMemberAction {
 export enum UserAction {
   VIEW = `user:view`,
   VIEW_COMPANIES = `user:view_companies`,
-}
-
-export enum ProjectAction {
-  UPLOAD_DOCUMENT = `project:upload_document`,
-  VIEW_DOCUMENTS = `project:view_documents`,
 }
 
 export type UserActor =
@@ -54,13 +45,5 @@ type CompanyMemberResource = {
   type: `CompanyMember`;
   id: string;
 };
-type ProjectResource = {
-  type: `Project`;
-  id: string;
-};
 
-export type Resource =
-  | CompanyMemberResource
-  | CompanyResource
-  | UserResource
-  | ProjectResource;
+export type Resource = CompanyMemberResource | CompanyResource | UserResource;

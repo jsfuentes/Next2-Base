@@ -16,7 +16,7 @@ export const getServerSideProps = RequireUser(async ({ user, authContext }) => {
   if (company) {
     return {
       redirect: {
-        destination: Routes.company.dashboard({ orgSlug: company.slug }),
+        destination: Routes.appHome({}),
         permanent: false,
       },
     };

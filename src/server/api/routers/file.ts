@@ -4,7 +4,6 @@ import { z } from "zod";
 import { env } from "@/env";
 import { companyRequiredProcedure, createTRPCRouter } from "@/server/api/trpc";
 import { fileService } from "@/server/services/file/service";
-import { ProjectService } from "@/server/services/project/service";
 
 export const fileRouter = createTRPCRouter({
   getPresignedUrlForRagDocumentUpload: companyRequiredProcedure
@@ -67,21 +66,6 @@ export const fileRouter = createTRPCRouter({
         };
       }
     ),
-  getDocumentFromS3: companyRequiredProcedure
-    .input(
-      z.object({
-        documentId: z.string(),
-      })
-    )
-    .query(async ({ ctx: { authContext, company }, input: { documentId } }) => {
-      const documentUrl = await ProjectService.withContext(
-        authContext
-      ).getProjectDocumentS3Url({
-        companyId: company.id,
-        documentId,
-      });
-      return { documentUrl };
-    }),
   getPresignedDownloadUrlForKey: companyRequiredProcedure
     .input(
       z.object({

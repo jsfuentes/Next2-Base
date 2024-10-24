@@ -36,8 +36,6 @@ model User {
   sessions      Session[]
   Companies     CompanyMember[]
   LoginCodes    LoginCode[]
-
-  Project Project[]
 }
 
 model VerificationToken {
@@ -58,8 +56,6 @@ model Company {
   slug       String @unique
 
   members CompanyMember[]
-
-  Project Project[]
 }
 
 // Explicit relationship table for Company/User many-to-many relationship
@@ -88,145 +84,6 @@ model LoginCode {
   expires   DateTime
 }
 
-model Project {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-
-  name   String
-  status ProjectStatus @default(ACTIVE)
-
-  createdBy       User        @relation(fields: [createdByUserId], references: [id])
-  createdByUserId String
-  company         Company     @relation(fields: [companyId], references: [id])
-  companyId       String
-  ragProvider     RAGProvider
-
-  documents ProjectDocument[]
-
-  ProjectGenAISections ProjectGenAISection[]
-
-  GenAIReportSections GenAIReportSection[]
-  ParsedDocuments     ParsedDocument[]
-}
-
-model ProjectDocument {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-
-  name                  String
-  // TODO: Add status
-  // status                RAGDocumentStatus
-  s3Key                 String
-  ragProviderDocumentId String
-  project               Project @relation(fields: [projectId], references: [id])
-  projectId             String
-
-  ChatThreads ChatMessageThread[]
-}
-
-enum ParsedDocumentType {
-  IMAGE
-  PDF
-}
-
-model ParsedDocument {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-
-  Project   Project @relation(fields: [projectId], references: [id])
-  projectId String
-
-  parsedDocument Json
-  documentType   ParsedDocumentType
-  documentName   String
-  s3Key          String
-  parserResultId String // This is the id returned by whatever parser we use (e.g. reducto, etc)
-
-  @@index([projectId])
-}
-
-enum RAGProvider {
-  // Bedrock
-  // Cohere
-  Ragie
-  Carbon
-}
-
-enum RAGDocumentStatus {
-  READY
-  PROCESSING
-  FAILED
-}
-
-model ProjectGenAISection {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-
-  project       Project @relation(fields: [projectId], references: [id])
-  projectId     String
-  prompt        String
-  response      String
-  referenceText String?
-}
-
-model GenAIReportSection {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-
-  project   Project @relation(fields: [projectId], references: [id])
-  projectId String
-
-  sectionHeading String
-  order          Decimal
-
-  subSections GenAIReportSubsection[]
-
-  @@unique([projectId, order], name: "unique_order_per_project")
-  @@index([projectId, order], name: "order_by_project")
-}
-
-model GenAIReportSubsection {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-
-  Section           GenAIReportSection     @relation(fields: [sectionId], references: [id], onDelete: Cascade)
-  sectionId         String
-  subSectionHeading String
-  Paragraphs        GenAIReportParagraph[]
-
-  order Decimal
-
-  @@unique([sectionId, order], name: "unique_order_per_section")
-  @@index([sectionId, order], name: "order_by_section")
-}
-
-model GenAIReportParagraph {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-
-  SubSection   GenAIReportSubsection @relation(fields: [subSectionId], references: [id], onDelete: Cascade)
-  subSectionId String
-  paragraph    String                @db.Text
-
-  order Decimal
-
-  @@unique([subSectionId, order], name: "unique_order_per_sub_section")
-  @@index([subSectionId, order], name: "order_by_sub_section")
-}
-
-// Add this enum at the end of the file
-enum ProjectStatus {
-  ACTIVE
-  ARCHIVED
-}
-
 model ChatMessageRow {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -248,11 +105,6 @@ model ChatMessageThread {
   name String
 
   messages ChatMessageRow[]
-
-  Document   ProjectDocument @relation(fields: [documentId], references: [id])
-  documentId String
-
-  @@index([documentId])
 }
 
 model VectorizedItem {

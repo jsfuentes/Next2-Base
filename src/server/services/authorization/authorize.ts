@@ -2,7 +2,6 @@ import { logger } from "@/init/logger";
 import { prisma } from "@/server/init/db";
 import type { AuthenticationContext } from "@/server/services/authentication/context";
 import type { Action, Resource } from "@/server/services/authorization/types";
-import { ProjectAction } from "@/server/services/authorization/types";
 import {
   CompanyAction,
   CompanyMemberAction,
@@ -67,33 +66,6 @@ export async function authorize(
           if (!actorIsTargetUser) {
             throw new APIForbiddenError(
               `Only target user can perform action "${action}" on resource "${resourceType}"`
-            );
-          }
-          return true;
-      }
-    case `Project`:
-      const projectId = resource.id;
-      const { companyId } = await prisma.project.findUniqueOrThrow({
-        where: {
-          id: projectId,
-        },
-      });
-      const member = await prisma.companyMember.findUnique({
-        where: {
-          companyId_userId: {
-            companyId,
-            userId: actor.id,
-          },
-        },
-      });
-      const isUserMemberOfProjectOwner = !!member;
-
-      switch (action as ProjectAction) {
-        case ProjectAction.UPLOAD_DOCUMENT:
-        case ProjectAction.VIEW_DOCUMENTS:
-          if (!isUserMemberOfProjectOwner) {
-            throw new APIForbiddenError(
-              `Only user for project's company can perform action "${action}" on resource "${resourceType}"`
             );
           }
           return true;

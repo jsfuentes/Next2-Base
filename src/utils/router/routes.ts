@@ -18,35 +18,4 @@ export const Routes = {
   appHome: makeRoute(() => `/user/profile`),
   postLogin: makeRoute(() => `/post-login`),
   account: makeRoute(() => `/user/account`),
-
-  // TODO: figure out how to nest these routes
-  company: {
-    base: makeRoute(
-      ({ orgSlug }) => `/o/${orgSlug}`,
-      z.object({
-        orgSlug: z.string(),
-      })
-    ),
-    dashboard: makeRoute(
-      ({ orgSlug }) => `/o/${orgSlug}/dashboard`,
-      z.object({
-        orgSlug: z.string(),
-      })
-    ),
-    project: {
-      home: makeRoute(
-        ({ orgSlug, projectId }) => `/o/${orgSlug}/project/${projectId}`,
-        z.object({
-          orgSlug: z.string(),
-          projectId: z.string(),
-        })
-      ),
-      new: makeRoute(
-        ({ orgSlug }) => `/o/${orgSlug}/project/new`,
-        z.object({
-          orgSlug: z.string(),
-        })
-      ),
-    },
-  },
 };
