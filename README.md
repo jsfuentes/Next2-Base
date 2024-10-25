@@ -62,7 +62,6 @@ Edit db-init/init.sh with the correct password
 
 - Add Sentry, add my component library, add posthog
 - Move away from lucia auth, being deprecated: https://github.com/lucia-auth/lucia/discussions/1714
-- Upgrade the version of node and the package manager, perhaps remove the strictness of versions
 - Upgrade React, rn app router uses react v19 but pages uses v18 so could be confusing
 
 **I deleted 'micro' and 'next-logger', it might matter**
