@@ -54,6 +54,10 @@ Go to http://localhost:8233 to see temporal web ui.
 
 Add to env.js and .env file.
 
+### Dumping external db to local db
+
+Edit db-init/init.sh with the correct password
+
 ### Todo next
 
 - Add Sentry, add my component library, add posthog

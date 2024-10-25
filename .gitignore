@@ -50,7 +50,6 @@ yarn-error.log*
 .api/apis/*/node_modules
 
 .env*
-db-init/init.sh
 
 # Python
 __pycache__/
