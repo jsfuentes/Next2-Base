@@ -12,7 +12,6 @@ export const env = createEnv({
       .default(`development`),
 
     DATABASE_URL: z.string().url(),
-    PRISMA_FIELD_ENCRYPTION_KEY: z.string(),
     PRISMA_LOG_LEVEL: z.string().optional(),
 
     TEMPORAL_ADDRESS: z.string(),
@@ -60,7 +59,6 @@ export const env = createEnv({
 
     DATABASE_URL: process.env.DATABASE_URL,
     PRISMA_LOG_LEVEL: process.env.PRISMA_LOG_LEVEL,
-    PRISMA_FIELD_ENCRYPTION_KEY: process.env.PRISMA_FIELD_ENCRYPTION_KEY,
 
     TEMPORAL_ADDRESS: process.env.TEMPORAL_ADDRESS,
     TEMPORAL_CLIENT_KEY: process.env.TEMPORAL_CLIENT_KEY,

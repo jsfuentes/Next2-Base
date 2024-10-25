@@ -19,7 +19,7 @@
 pnpm install
 ```
 
-- Rename `sample.env` to `.env` and add environment variables
+- Rename `sample.env` to `.env.development` and add environment variables
 
 ## Running the app
 
@@ -52,7 +52,7 @@ Go to http://localhost:8233 to see temporal web ui.
 
 ### Adding new environment variables
 
-Add to env.js and .env file.
+Add to `env.js` and `.env.development` file.
 
 ### Dumping external db to local db
 
