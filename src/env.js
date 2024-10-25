@@ -27,12 +27,13 @@ export const env = createEnv({
     TEMPORAL_QUEUE: z.string(),
 
     AWS_REGION: z.string(),
-    AWS_S3_ACCESS_KEY_ID: z.string(),
-    AWS_S3_SECRET_ACCESS_KEY: z.string(),
+    AWS_S3_ACCESS_KEY_ID: z.string().optional(),
+    AWS_S3_SECRET_ACCESS_KEY: z.string().optional(),
     AWS_S3_BUCKET: z.string(),
 
-    OPENAI_API_KEY: z.string(),
-    LOGROCKET_APP_ID: z.string(),
+    OPENAI_API_KEY: z.string().optional(),
+    VOYAGE_API_KEY: z.string().optional(),
+    LOGROCKET_APP_ID: z.string().optional(),
   },
 
   /**
@@ -72,6 +73,7 @@ export const env = createEnv({
     AWS_S3_BUCKET: process.env.AWS_S3_BUCKET,
 
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    VOYAGE_API_KEY: process.env.VOYAGE_API_KEY,
     LOGROCKET_APP_ID: process.env.LOGROCKET_APP_ID,
   },
   /**
