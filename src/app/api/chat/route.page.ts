@@ -1,9 +1,8 @@
 import { openai } from "@ai-sdk/openai";
 import { streamObject } from "ai";
 
+import { religionQAFormSchema, religionQASchema } from "@/app/types";
 import { vectorModel } from "@/server/services/vector/model";
-
-import { religionQAFormSchema, religionQASchema } from "../../types";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;

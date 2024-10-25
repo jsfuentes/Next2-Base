@@ -12,7 +12,7 @@ import { api } from "@/utils/api";
 const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
   useEffect(() => {
     if (env.NEXT_PUBLIC_NODE_ENV === `production`) {
-      LogRocket.init(`whrifo/degrom-prod`);
+      LogRocket.init(env.LOGROCKET_APP_ID);
     }
   }, []);
   return (

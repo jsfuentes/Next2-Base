@@ -29,7 +29,7 @@ import {
   FormMessage,
 } from "@/client/components/ui/form";
 import { Input } from "@/client/components/ui/input";
-import { ProfileDropdown } from "@/client/components/views/project/ProfileDropdown";
+import { ProfileDropdown } from "@/client/components/views/common/ProfileDropdown";
 import { env } from "@/env";
 import { RequireUser } from "@/pages/util";
 import { api } from "@/utils/api";

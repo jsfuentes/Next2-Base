@@ -1,31 +1,30 @@
-import { logger } from "@/init/logger";
 import { RequireUser } from "@/pages/util";
-import { UserService } from "@/server/services/user/service";
 import { Routes } from "@/utils/router/routes";
 
 export default function PostLogin() {
   return <></>;
 }
 
-export const getServerSideProps = RequireUser(async ({ user, authContext }) => {
-  const companies = await UserService.withContext(authContext).getCompanies({
-    userId: user.id,
-  });
+// export const getServerSideProps = RequireUser(async ({ user, authContext }) => {
+export const getServerSideProps = RequireUser(() => {
+  // const companies = await UserService.withContext(authContext).getCompanies({
+  //   userId: user.id,
+  // });
 
-  const [company] = companies;
-  if (company) {
-    return {
-      redirect: {
-        destination: Routes.appHome({}),
-        permanent: false,
-      },
-    };
-  }
-
-  logger.error(`No companies found for user`, { userId: user.id });
-  // If no companies found, return a 500 error
+  // const [company] = companies;
+  // if (company) {
   return {
-    props: {},
-    notFound: true,
+    redirect: {
+      destination: Routes.account({}),
+      permanent: false,
+    },
   };
+  // }
+
+  // logger.error(`No companies found for user`, { userId: user.id });
+  // // If no companies found, return a 500 error
+  // return {
+  //   props: {},
+  //   notFound: true,
+  // };
 });

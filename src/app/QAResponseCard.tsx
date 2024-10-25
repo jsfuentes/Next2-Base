@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@/client/components/ui/card";
 import { Skeleton } from "@/client/components/ui/skeleton";
-import Markdown from "@/client/components/views/project/activity/assistant/message/markdown";
+import Markdown from "@/client/components/views/common/markdown";
 
 function QAResponseCard({
   qaResponses,

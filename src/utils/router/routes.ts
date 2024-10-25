@@ -15,7 +15,8 @@ export const Routes = {
 
   logout: makeRoute(() => `/logout`),
   landing: makeRoute(() => `/`),
-  appHome: makeRoute(() => `/user/profile`),
   postLogin: makeRoute(() => `/post-login`),
+
+  appHome: makeRoute(() => `/user/profile`),
   account: makeRoute(() => `/user/account`),
 };
